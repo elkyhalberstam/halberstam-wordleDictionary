@@ -2,51 +2,43 @@ package halberstam.wordle;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Locale;
 
-public class WordleDictionary
-{
+public class WordleDictionary {
     private File file;
-    private ArrayList<String> masterList = new ArrayList<>();
+    private ArrayList<String> wordList = new ArrayList<>();
+    private ArrayList<String> definitionList = new ArrayList<>();
 
-    public WordleDictionary() throws IOException
-    {
-        this.file = new File("halberstam/wordle/dictionary.txt");
+    public WordleDictionary() throws IOException {
+        this.file = new File("src/main/java/halberstam/wordle/dictionary.txt");
         loadingDictionary();
     }
 
-    private void loadingDictionary() throws IOException
-    {
+    private void loadingDictionary() throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(file));
         String line;
-        while ((line = br.readLine()) != null)
-        {
-            masterList.add(line);
-        }
-    }
-
-    public String getDefinition(String word)
-    {
-        int currWord = 0;
-        while(currWord < masterList.size())
-        {
-            String[] currLine = masterList.get(currWord).split(" ", 2);
-            if(currLine[0].equalsIgnoreCase(word))
+        while ((line = br.readLine()) != null) {
+            String[] currLine = line.split(" ", 2);
+            wordList.add(currLine[0]);
+            if(currLine.length>1)
             {
-                return currLine[1];
+                definitionList.add(currLine[1]);
+            }else{
+                definitionList.add("");
             }
-            currWord++;
         }
-        return null;
     }
 
-    public ArrayList<String> getList()
-    {
-        ArrayList<String> retval = new ArrayList<>();
-        for(int i=0; i< masterList.size(); i++)
+    public String getDefinition(String word) {
+        int idxWord = wordList.indexOf(word.toUpperCase());
+        if(idxWord < 0)
         {
-            String[] currLine = masterList.get(i).split(" ", 1);
-            retval.add(currLine[0]);
+            return null;
         }
-        return retval;
+        return definitionList.get(idxWord);
+    }
+
+    public ArrayList<String> getList() {
+        return wordList;
     }
 }
