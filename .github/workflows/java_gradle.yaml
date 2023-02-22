@@ -6,7 +6,7 @@ name: Java/Gradle CI
 # https://docs.github.com/en/actions/guides/building-and-testing-java-with-gradle
 # https://github.com/dbelyaev/action-checkstyle
 
-on: [pull_request]
+on: [ pull_request ]
 
 jobs:
 
@@ -26,7 +26,11 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-
+    permissions:
+      checks: write
+      contents: write
+      issues: write
+      pull-requests: write
     steps:
       - uses: actions/checkout@v2
       - name: set up JDK 11

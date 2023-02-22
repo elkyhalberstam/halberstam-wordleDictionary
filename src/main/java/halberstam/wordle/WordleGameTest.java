@@ -11,14 +11,26 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class WordleGameTest {
 
     @Test
-    public void guess() throws IOException {
+    public void guessCorrect() throws IOException {
         //given
-        WordleGame one = new WordleGame();
+        WordleGame testGame = new WordleGame();
         //when
-        String word = one.getWord();
-        CharResult[] whats = one.guess(word);
-        CharResult[] once = {CharResult.Correct ,CharResult.Correct,CharResult.Correct,CharResult.Correct,CharResult.Correct};
+        String word = testGame.getWord();
+        CharResult[] testGuess = testGame.guess(word);
+        CharResult[] guessCorrect = {CharResult.Correct ,CharResult.Correct,CharResult.Correct,CharResult.Correct,CharResult.Correct};
         //then
-        assertArrayEquals(whats, once);
+        assertArrayEquals(guessCorrect, testGuess);
+    }
+    @Test
+    public void guessWrong() throws IOException {
+        //given
+        WordleGame testGame = new WordleGame();
+        //when
+        String word = testGame.getWord();
+        word = "z" +word.substring(1);
+        CharResult[] testGuess = testGame.guess(word);
+        CharResult[] guessWrong = {CharResult.NotFound ,CharResult.Correct,CharResult.Correct,CharResult.Correct,CharResult.Correct};
+        //then
+        assertArrayEquals(guessWrong,testGuess);
     }
 }

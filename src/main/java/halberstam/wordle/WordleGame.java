@@ -2,13 +2,11 @@ package halberstam.wordle;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Random;
 
-public class WordleGame
-{
-    ArrayList<String> wordList;
-    String word;
+public class WordleGame {
+    private ArrayList<String> wordList;
+    private String word;
 
     public WordleGame() throws IOException {
         loadingWordlist();
@@ -26,59 +24,45 @@ public class WordleGame
         word = wordList.get(rand);
     }
 
-    private void loadingWordlist() throws IOException
-    {
+    private void loadingWordlist() throws IOException {
         wordList = new ArrayList<>();
 
         WordleDictionary dictionary = new WordleDictionary();
 
         ArrayList<String> longList = dictionary.getList();
 
-        for(int i =0; i<longList.size(); i++)
-        {
-            if(longList.get(i).length() < 5)
-            {
-                continue;
-            }
-            else if(longList.get(i).length() == 5)
-            {
+        for (int i = 0; i < longList.size(); i++) {
+            String currWord = longList.get(i);
+            if (currWord.length() == 5) {
                 wordList.add(longList.get(i));
-            }
-            else if(longList.get(i).length() > 5)
-            {
+            } else if (currWord.length() > 5) {
                 break;
             }
         }
     }
 
-    public CharResult[] guess(String guessString)
-    {
+    public CharResult[] guess(String guessString) {
         //--------errors to think about
         //what about double letters in guessString
         //what about double letters in word
         //what about guessString being > 5 letters
         //what about guessString being < 5 letters
 
-        CharResult[] result = new CharResult[5];
+        CharResult[] result = {CharResult.NotFound, CharResult.NotFound, CharResult.NotFound, CharResult.NotFound, CharResult.NotFound};
         guessString.toUpperCase();
-        int currLetter = 0;
-        while (currLetter < guessString.length())
-        {
-            for (int i = 0; i < word.length(); i++)
-            {
-                if (guessString.charAt(currLetter) == word.charAt(i))
-                {
+        for (int currLetter = 0; currLetter < guessString.length(); currLetter++) {
+            for (int i = 0; i < word.length(); i++) {
+                if (guessString.charAt(currLetter) == word.charAt(i)) {
                     if (currLetter == i) {
                         result[currLetter] = CharResult.Correct;
                         break;
                     } else {
+                        //I still have the double letter problem - will be dealing wiht it after class
                         result[currLetter] = CharResult.WrongPlace;
                         break;
                     }
                 }
-                result[currLetter] = CharResult.NotFound;
             }
-        currLetter++;
         }
         return result;
     }
