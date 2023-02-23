@@ -1,6 +1,5 @@
 package halberstam.wordle;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -8,8 +7,8 @@ public class WordleGame {
     private ArrayList<String> wordList;
     private String word;
 
-    public WordleGame() throws IOException {
-        loadingWordlist();
+    public WordleGame(WordleDictionary dictionary) {
+        loadingWordlist(dictionary);
         generateRandomWord();
 
     }
@@ -24,10 +23,8 @@ public class WordleGame {
         word = wordList.get(rand);
     }
 
-    private void loadingWordlist() throws IOException {
+    private void loadingWordlist(WordleDictionary dictionary) {
         wordList = new ArrayList<>();
-
-        WordleDictionary dictionary = new WordleDictionary();
 
         ArrayList<String> longList = dictionary.getList();
 
