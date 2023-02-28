@@ -20,7 +20,6 @@ public class WordleGameFrame extends JFrame {
 
         JLabel output = new JLabel("output");
         mainPanel.add(output, BorderLayout.CENTER);
-
         JButton button = new JButton("Guess");
         mainPanel.add(button, BorderLayout.SOUTH);
 
