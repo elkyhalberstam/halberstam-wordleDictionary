@@ -45,7 +45,6 @@ public class WordleGame {
         //what about guessString being > 5 letters
         //what about guessString being < 5 letters
 
-        guessString.toUpperCase();
         CharResult[] result = new CharResult[5];
 
         for (int currLetter = 0; currLetter < guessString.length(); currLetter++) {
