@@ -9,9 +9,19 @@ import java.io.IOException;
 import static java.lang.System.exit;
 
 public class WordleGameFrame extends JFrame {
-    private JTextField[][] fields;
+    //private JTextField[][] fields; - from class
 
     public WordleGameFrame() {
+
+        WordleDictionary dictionary = null;
+        try {
+            dictionary = new WordleDictionary();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            exit(0);
+        }
+        WordleGame newGame = new WordleGame(dictionary);
+
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
 
@@ -26,14 +36,6 @@ public class WordleGameFrame extends JFrame {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                WordleDictionary dictionary = null;
-                try {
-                    dictionary = new WordleDictionary();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                    exit(0);
-                }
-                WordleGame newGame = new WordleGame(dictionary);
                 CharResult[] newGuess = newGame.guess(textGuess.getText().toString());
                 output.setText(newGuess.toString());
             }
