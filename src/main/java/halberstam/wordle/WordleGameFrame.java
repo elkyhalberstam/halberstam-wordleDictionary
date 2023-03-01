@@ -42,7 +42,7 @@ public class WordleGameFrame extends JFrame {
         });
 
         setContentPane(mainPanel);
-        setSize(600, 1000);
+        setSize(300, 100);
         setTitle("Wordle Game");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
