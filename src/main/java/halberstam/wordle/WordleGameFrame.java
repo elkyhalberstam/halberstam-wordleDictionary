@@ -2,9 +2,8 @@ package halberstam.wordle;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.Arrays;
 
 import static java.lang.System.exit;
 
@@ -33,12 +32,9 @@ public class WordleGameFrame extends JFrame {
         JButton button = new JButton("Guess");
         mainPanel.add(button, BorderLayout.SOUTH);
 
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                CharResult[] newGuess = newGame.guess(textGuess.getText().toString());
-                output.setText(newGuess.toString());
-            }
+        button.addActionListener(e -> {
+            CharResult[] newGuess = newGame.guess(textGuess.getText());
+            output.setText(Arrays.toString(newGuess));
         });
 
         setContentPane(mainPanel);
