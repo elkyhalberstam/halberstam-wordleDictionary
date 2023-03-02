@@ -45,8 +45,9 @@ public class WordleGame {
         //what about guessString being > 5 letters
         //what about guessString being < 5 letters
 
-        CharResult[] result = {CharResult.NotFound, CharResult.NotFound, CharResult.NotFound, CharResult.NotFound, CharResult.NotFound};
-        guessString.toUpperCase();
+        guessString = guessString.toUpperCase();
+        CharResult[] result = new CharResult[5];
+
         for (int currLetter = 0; currLetter < guessString.length(); currLetter++) {
             for (int i = 0; i < word.length(); i++) {
                 if (guessString.charAt(currLetter) == word.charAt(i)) {
@@ -59,6 +60,7 @@ public class WordleGame {
                         break;
                     }
                 }
+                result[currLetter] = CharResult.NotFound;
             }
         }
         return result;

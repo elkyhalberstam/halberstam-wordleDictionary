@@ -17,11 +17,11 @@ class WordleGameTest {
     public void guessCorrect() {
         //given
         WordleDictionary dictionary = Mockito.mock(WordleDictionary.class);
-        ArrayList<String> words = new ArrayList<>(List.of("APPLE"));
+        ArrayList<String> words = new ArrayList<>(List.of("DRINK"));
         doReturn(words).when(dictionary).getList();
         WordleGame testGame = new WordleGame(dictionary);
         //when
-        CharResult[] testGuess = testGame.guess("APPLE");
+        CharResult[] testGuess = testGame.guess("DRINK");
         //then
         CharResult[] guessCorrect = {Correct, Correct, Correct, Correct, Correct};
         assertArrayEquals(guessCorrect, testGuess);
