@@ -53,7 +53,7 @@ public class WordleController {
 
     }
 
-    //
+    //adding keyboard controls
 //    new* addKeyListener(new KeyListener()
 //    {
 //

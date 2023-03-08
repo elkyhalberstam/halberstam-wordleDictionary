@@ -17,13 +17,12 @@ public class WordleGameFrame extends JFrame {
 
         controller = new WordleController(wordleGame, dictionary, labels, keyboard, enter, backspace);
 
-        //
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
 
         JPanel centerPanel = new JPanel();
         centerPanel.setLayout(new GridLayout(6, 5));
-        //centerPanel.s
+
         for (int i = 0; i < labels.length; i++) {
             for (int j = 0; j < labels[i].length; j++) {
                 labels[i][j] = new JLabel("X", SwingConstants.CENTER);
