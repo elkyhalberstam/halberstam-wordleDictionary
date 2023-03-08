@@ -2,75 +2,85 @@ package halberstam.wordle;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
-import java.util.Arrays;
-
-import static java.lang.System.exit;
 
 public class WordleGameFrame extends JFrame {
-    //private JTextField[][] fields; - from class
+    private JLabel[][] labels = new JLabel[6][5];
+    private JButton[] keyboard = new JButton[28];
+    private JButton enter;
+    private JButton backspace;
 
-    public WordleGameFrame() {
+    private CharResult[] guessResult;
+    private String theGuess;
+    private WordleController controller;
 
-        WordleDictionary dictionary = null;
-        try {
-            dictionary = new WordleDictionary();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            exit(0);
-        }
-        WordleGame newGame = new WordleGame(dictionary);
+    public WordleGameFrame(WordleGame wordleGame, WordleDictionary dictionary) {
 
+        controller = new WordleController(wordleGame, dictionary, labels, keyboard, enter, backspace);
+
+        //
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
 
-        JTextField textGuess = new JTextField("Type your guess");
-        mainPanel.add(textGuess, BorderLayout.NORTH);
+        JPanel centerPanel = new JPanel();
+        centerPanel.setLayout(new GridLayout(6, 5));
+        //centerPanel.s
+        for (int i = 0; i < labels.length; i++) {
+            for (int j = 0; j < labels[i].length; j++) {
+                labels[i][j] = new JLabel("X", SwingConstants.CENTER);
+                centerPanel.add(labels[i][j]);
+            }
+        }
 
-        JLabel output = new JLabel("output");
-        mainPanel.add(output, BorderLayout.CENTER);
-        JButton button = new JButton("Guess");
-        mainPanel.add(button, BorderLayout.SOUTH);
+        mainPanel.add(centerPanel, BorderLayout.CENTER);
 
-        button.addActionListener(e -> {
-            CharResult[] newGuess = newGame.guess(textGuess.getText());
-            output.setText(Arrays.toString(newGuess));
-        });
+        JPanel keyboardlayout = new JPanel();
+        keyboardlayout.setLayout(new BorderLayout());
+
+        char[][] keyboardlist = {{'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'}, {'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'}, {'Z', 'X', 'C', 'V', 'B', 'N', 'M'}};
+        int letterNum = 0;
+
+        JPanel keyboardline1 = new JPanel();
+        keyboardline1.setLayout(new FlowLayout());
+        for (int i = 0; i < keyboardlist[0].length; i++) {
+            char letter = keyboardlist[0][i];
+            keyboard[letterNum] = new JButton(String.valueOf((letter)));
+            keyboardline1.add(keyboard[letterNum++]);
+        }
+        keyboardlayout.add(keyboardline1, BorderLayout.NORTH);
+
+        JPanel keyboardline2 = new JPanel();
+        keyboardline2.setLayout(new FlowLayout());
+        for (int i = 0; i < keyboardlist[1].length; i++) {
+            char letter = keyboardlist[1][i];
+            keyboard[letterNum] = new JButton(String.valueOf((letter)));
+            keyboardline2.add(keyboard[letterNum++]);
+        }
+        keyboardlayout.add(keyboardline2, BorderLayout.CENTER);
+
+
+        JPanel keyboardline3 = new JPanel();
+        keyboardline3.setLayout(new FlowLayout());
+
+        enter = new JButton("Enter");
+        keyboardline3.add(enter);
+
+        for (int i = 0; i < keyboardlist[2].length; i++) {
+            char letter = keyboardlist[2][i];
+            keyboard[letterNum] = new JButton(String.valueOf((letter)));
+            keyboardline3.add(keyboard[letterNum++]);
+        }
+
+        backspace = new JButton("Backspace");
+        keyboardline3.add(backspace);
+
+        keyboardlayout.add(keyboardline3, BorderLayout.SOUTH);
+
+        mainPanel.add(keyboardlayout, BorderLayout.SOUTH);
 
         setContentPane(mainPanel);
-        setSize(300, 100);
+        setSize(600, 400);
         setTitle("Wordle Game");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 }
 
-//code from class
-        /*JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new BorderLayout());
-
-        JPanel centerPanel = new JPanel();
-        centerPanel.setLayout(new GridLayout(4, 3));
-
-
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 3; j++) {
-                JTextField label = new JTextField("LABEL" + i + "," + j);
-                centerPanel.add(label);
-            }
-        }
-        mainPanel.add(centerPanel, BorderLayout.CENTER);
-
-        JButton button = new JButton("Guess");
-        mainPanel.add(button, BorderLayout.SOUTH);
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Guess Clicked");
-            }
-        });
-
-        setContentPane(mainPanel);
-        setSize(600, 1000);
-        setTitle("Wordle Game");
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        */
