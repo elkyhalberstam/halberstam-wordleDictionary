@@ -3,8 +3,9 @@ package halberstam.wordle;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static halberstam.wordle.CharResult.Correct;
 import static halberstam.wordle.CharResult.NotFound;
@@ -17,7 +18,7 @@ class WordleGameTest {
     public void guessCorrect() {
         //given
         WordleDictionary dictionary = Mockito.mock(WordleDictionary.class);
-        ArrayList<String> words = new ArrayList<>(List.of("DRINK"));
+        Set words = new HashSet((List.of("DRINK")));
         doReturn(words).when(dictionary).getList();
         WordleGame testGame = new WordleGame(dictionary);
         //when
@@ -31,7 +32,7 @@ class WordleGameTest {
     public void guessWrong() {
         //given
         WordleDictionary dictionary = Mockito.mock(WordleDictionary.class);
-        ArrayList<String> words = new ArrayList<>(List.of("DRINK"));
+        Set words = new HashSet((List.of("DRINK")));
         doReturn(words).when(dictionary).getList();
         WordleGame testGame = new WordleGame(dictionary);
         //when

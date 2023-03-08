@@ -14,7 +14,8 @@ public class WordleController {
     private int lettersTyped;
     private int numGuesses;
 
-    public WordleController(WordleGame wordleGame, WordleDictionary dictionary, JLabel[][] labels, JButton[] keyboard, JButton enter, JButton backspace) {
+    public WordleController(WordleGame wordleGame, WordleDictionary dictionary, JLabel[][] labels,
+                            JButton[] keyboard, JButton enter, JButton backspace) {
         this.wordleGame = wordleGame;
         this.dictionary = dictionary;
         this.labels = labels;
@@ -40,8 +41,8 @@ public class WordleController {
             for (int i = 0; i < labels[numGuesses].length; i++) {
                 word += labels[numGuesses][i].getText();
             }
-            String exist = dictionary.getDefinition(word);
-            if (exist != null) {
+
+            if (dictionary.doesExist(word)) {
                 CharResult[] guessResult = wordleGame.guess(word);
                 System.out.println(guessResult); //this really should be a color thing
                 numGuesses++;
@@ -60,11 +61,11 @@ public class WordleController {
         //enter.addActionListener(e -> enterGuess());
         //backspace.addActionListener(e -> System.out.println("try"));
 
-        for (int i = 0; i < keyboard.length; i++) {
-            //String letter = keyboard[i].getText();
-            //find open label
-            //keyboard[i].addActionListener(e ->/*set open label to letter*/ System.out.println(letter));
-        }
+        //for (int i = 0; i < keyboard.length; i++) {
+        //String letter = keyboard[i].getText();
+        //find open label
+        //keyboard[i].addActionListener(e ->/*set open label to letter*/ System.out.println(letter));
+        //}
 
     }
 

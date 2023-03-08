@@ -18,7 +18,8 @@ public class WordleGameFrame extends JFrame {
 
     public WordleGameFrame(WordleGame wordleGame, WordleDictionary dictionary) {
 
-        controller = new WordleController(wordleGame, dictionary, labels, keyboard, enter, backspace);
+        controller = new WordleController(wordleGame, dictionary,
+                labels, keyboard, enter, backspace);
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
@@ -39,7 +40,8 @@ public class WordleGameFrame extends JFrame {
         JPanel keyboardlayout = new JPanel();
         keyboardlayout.setLayout(new BorderLayout());
 
-        char[][] keyboardlist = {{'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'}, {'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'}, {'Z', 'X', 'C', 'V', 'B', 'N', 'M'}};
+        char[][] keyboardlist = {{'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'},
+                {'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'}, {'Z', 'X', 'C', 'V', 'B', 'N', 'M'}};
         int letterNum = 0;
 
         JPanel keyboardline1 = new JPanel();
