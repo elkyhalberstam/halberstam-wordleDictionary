@@ -11,6 +11,9 @@ public class WordleController {
     private WordleDictionary dictionary;
     private JLabel labels[][];
 
+    private int lettersTyped;
+    private int numGuesses;
+
     public WordleController(WordleGame wordleGame, WordleDictionary dictionary, JLabel[][] labels, JButton[] keyboard, JButton enter, JButton backspace) {
         this.wordleGame = wordleGame;
         this.dictionary = dictionary;
@@ -18,22 +21,34 @@ public class WordleController {
         this.keyboard = keyboard;
         this.enter = enter;
         this.backspace = backspace;
+        lettersTyped = 0;
+        numGuesses = 0;
         addActionListeners();
     }
 
     public void addLetter(String letter) {
-        //check if row is locked - first letter == blocked
-        //add letter to the next empty letter in that row
+        if (numGuesses < 6 && lettersTyped < 6) {
+            labels[numGuesses][lettersTyped].setText(letter);
+            lettersTyped++;
+        }
     }
 
     public void enterGuess() {
-        //get current word from label lsit (concat it)
-        //check if word is in dictionary  - use method from dictionary class
-        //if no - say not a word
-        //if yes -
-        //run the guess method ==
-        // for now replace labels with the allotted place on list (later just change background)
-        //lock the row on labels list
+
+        if (numGuesses < 6 && lettersTyped == 6) {
+            String word = null;
+            for (int i = 0; i < labels[numGuesses].length; i++) {
+                word += labels[numGuesses][i].getText();
+            }
+            String exist = dictionary.getDefinition(word);
+            if (exist != null) {
+                CharResult[] guessResult = wordleGame.guess(word);
+                System.out.println(guessResult); //this really should be a color thing
+                numGuesses++;
+            } else {
+                System.out.println("not a word");
+            }
+        }
     }
 
     public void backspace() {
@@ -43,7 +58,7 @@ public class WordleController {
 
     public void addActionListeners() {
         //enter.addActionListener(e -> enterGuess());
-        //backspace.addActionListener(e -> backspace());
+        //backspace.addActionListener(e -> System.out.println("try"));
 
         for (int i = 0; i < keyboard.length; i++) {
             //String letter = keyboard[i].getText();
@@ -53,10 +68,4 @@ public class WordleController {
 
     }
 
-    //adding keyboard controls
-//    new* addKeyListener(new KeyListener()
-//    {
-//
-//    }
-//    ));
 }

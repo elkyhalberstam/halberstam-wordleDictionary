@@ -2,6 +2,9 @@ package halberstam.wordle;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.Locale;
 
 public class WordleGameFrame extends JFrame {
     private JLabel[][] labels = new JLabel[6][5];
@@ -25,11 +28,12 @@ public class WordleGameFrame extends JFrame {
 
         for (int i = 0; i < labels.length; i++) {
             for (int j = 0; j < labels[i].length; j++) {
-                labels[i][j] = new JLabel("X", SwingConstants.CENTER);
+                labels[i][j] = new JLabel("", SwingConstants.CENTER);
                 centerPanel.add(labels[i][j]);
+                labels[i][j].setBorder(BorderFactory.createLineBorder(Color.black, 1));
+
             }
         }
-
         mainPanel.add(centerPanel, BorderLayout.CENTER);
 
         JPanel keyboardlayout = new JPanel();
@@ -75,6 +79,30 @@ public class WordleGameFrame extends JFrame {
         keyboardlayout.add(keyboardline3, BorderLayout.SOUTH);
 
         mainPanel.add(keyboardlayout, BorderLayout.SOUTH);
+
+        addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char input = e.getKeyChar();
+                if (Character.isAlphabetic(input)) {
+                    controller.addLetter(String.valueOf(e.getKeyChar()).toUpperCase(Locale.ROOT));
+                } else if (String.valueOf(e.getKeyChar()).equals("\b")) {
+                    controller.backspace();
+                } else if (String.valueOf(e.getKeyChar()).equals("\n")) {
+                    controller.enterGuess();
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        });
 
         setContentPane(mainPanel);
         setSize(600, 400);
