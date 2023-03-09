@@ -8,7 +8,7 @@ import java.util.Locale;
 
 public class WordleGameFrame extends JFrame {
     private JLabel[][] labels = new JLabel[6][5];
-    private JButton[] keyboard = new JButton[28];
+    private JButton[] keyboard = new JButton[26];
     private JButton enter;
     private JButton backspace;
 
@@ -17,9 +17,6 @@ public class WordleGameFrame extends JFrame {
     private WordleController controller;
 
     public WordleGameFrame(WordleGame wordleGame, WordleDictionary dictionary) {
-
-        controller = new WordleController(wordleGame, dictionary,
-                labels, keyboard, enter, backspace);
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
@@ -82,6 +79,11 @@ public class WordleGameFrame extends JFrame {
 
         mainPanel.add(keyboardlayout, BorderLayout.SOUTH);
 
+        controller = new WordleController(wordleGame, dictionary,
+                labels, keyboard, enter, backspace);
+
+        setFocusable(true);
+        requestFocus();
         addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -106,10 +108,30 @@ public class WordleGameFrame extends JFrame {
             }
         });
 
+
+        enter.addActionListener(e -> {
+            controller.enterGuess();
+            requestFocus();
+        });
+        backspace.addActionListener(e -> {
+            controller.backspace();
+            requestFocus();
+        });
+
+        for (int i = 0; i < keyboard.length; i++) {
+            String letter = keyboard[i].getText();
+            keyboard[i].addActionListener(e -> {
+                controller.addLetter(letter);
+                requestFocus();
+            });
+        }
+
+
         setContentPane(mainPanel);
         setSize(600, 400);
         setTitle("Wordle Game");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 }
+
 

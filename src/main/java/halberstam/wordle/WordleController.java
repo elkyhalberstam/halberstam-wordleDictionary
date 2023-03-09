@@ -1,6 +1,10 @@
 package halberstam.wordle;
 
 import javax.swing.*;
+import java.awt.*;
+
+import static halberstam.wordle.CharResult.*;
+import static java.awt.Color.GRAY;
 
 public class WordleController {
 
@@ -24,7 +28,6 @@ public class WordleController {
         this.backspace = backspace;
         lettersTyped = 0;
         numGuesses = 0;
-        addActionListeners();
     }
 
     public void addLetter(String letter) {
@@ -36,37 +39,43 @@ public class WordleController {
 
     public void enterGuess() {
 
-        if (numGuesses < 6 && lettersTyped == 6) {
-            String word = null;
+        if (numGuesses < 6 && lettersTyped == 5) {
+            String word = "";
             for (int i = 0; i < labels[numGuesses].length; i++) {
                 word += labels[numGuesses][i].getText();
             }
 
             if (dictionary.doesExist(word)) {
                 CharResult[] guessResult = wordleGame.guess(word);
-                System.out.println(guessResult); //this really should be a color thing
+                checkingResult(guessResult);
                 numGuesses++;
+                lettersTyped = 0;
             } else {
-                System.out.println("not a word");
+                System.out.println(word + "Dose not exist");
+            }
+        }
+    }
+
+    private void checkingResult(CharResult[] guessResult) {
+        for (int i = 0; i < guessResult.length; i++) {
+            CharResult currChar = guessResult[i];
+            if (currChar.equals(NotFound)) {
+                labels[numGuesses][i].setOpaque(true);
+                labels[numGuesses][i].setBackground(GRAY);
+            } else if (currChar.equals(WrongPlace)) {
+                labels[numGuesses][i].setOpaque(true);
+                labels[numGuesses][i].setBackground(Color.YELLOW);
+            } else if (currChar.equals(Correct)) {
+                labels[numGuesses][i].setOpaque(true);
+                labels[numGuesses][i].setBackground(Color.GREEN);
             }
         }
     }
 
     public void backspace() {
-        //reset last label to 'X'
-        // set label on array to null
+        if (lettersTyped > 0) {
+            lettersTyped--;
+            labels[numGuesses][lettersTyped].setText("");
+        }
     }
-
-    public void addActionListeners() {
-        //enter.addActionListener(e -> enterGuess());
-        //backspace.addActionListener(e -> System.out.println("try"));
-
-        //for (int i = 0; i < keyboard.length; i++) {
-        //String letter = keyboard[i].getText();
-        //find open label
-        //keyboard[i].addActionListener(e ->/*set open label to letter*/ System.out.println(letter));
-        //}
-
-    }
-
 }
