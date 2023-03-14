@@ -2,6 +2,7 @@ package halberstam.wordle;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Set;
 
 public class WordleGame {
     private ArrayList<String> wordList;
@@ -26,14 +27,11 @@ public class WordleGame {
     private void loadingWordlist(WordleDictionary dictionary) {
         wordList = new ArrayList<>();
 
-        ArrayList<String> longList = dictionary.getList();
+        Set<String> longList = dictionary.getList();
 
-        for (int i = 0; i < longList.size(); i++) {
-            String currWord = longList.get(i);
+        for (String currWord : longList) {
             if (currWord.length() == 5) {
-                wordList.add(longList.get(i));
-            } else if (currWord.length() > 5) {
-                break;
+                wordList.add(currWord);
             }
         }
     }

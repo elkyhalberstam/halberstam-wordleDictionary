@@ -1,10 +1,11 @@
 package halberstam.wordle;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Set;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class WordleDictionaryTest {
 
@@ -23,7 +24,7 @@ class WordleDictionaryTest {
         //given
         WordleDictionary wordle = new WordleDictionary();
         //when
-        ArrayList<String> list = wordle.getList();
+        Set list = wordle.getList();
         //then
         assertEquals(167964, list.size());
     }
