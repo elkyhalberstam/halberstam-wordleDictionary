@@ -11,12 +11,12 @@ class WordleControllerTest {
     WordleGame wordleGame = mock(WordleGame.class);
     WordleDictionary dictionary = mock(WordleDictionary.class);
     JLabel letters[][] = new JLabel[][]{
-            {mock(), mock(), mock(), mock(), mock(),},
-            {mock(), mock(), mock(), mock(), mock(),},
-            {mock(), mock(), mock(), mock(), mock(),},
-            {mock(), mock(), mock(), mock(), mock(),},
-            {mock(), mock(), mock(), mock(), mock(),},
             {mock(), mock(), mock(), mock(), mock(),}
+            , {mock(), mock(), mock(), mock(), mock(),}
+            , {mock(), mock(), mock(), mock(), mock(),}
+            , {mock(), mock(), mock(), mock(), mock(),}
+            , {mock(), mock(), mock(), mock(), mock(),}
+            , {mock(), mock(), mock(), mock(), mock(),}
     };
     JButton[] keyboard = new JButton[]{mock()};
     JButton enter = mock();
@@ -50,16 +50,11 @@ class WordleControllerTest {
         controller.enterGuess();
 
         //then
-//        verify(letters[0][0]).setText("D");
-//        verify(letters[0][1]).setText("R");
-//        verify(letters[0][2]).setText("I");
-//        verify(letters[0][3]).setText("N");
-//        verify(letters[0][5]).setText("K");
         verify(letters[0][0]).setOpaque(true);
-//        verify(letters[0][1]).setOpaque(true);
-//        verify(letters[0][2]).setOpaque(true);
-//        verify(letters[0][3]).setOpaque(true);
-//        verify(letters[0][4]).setOpaque(true);
+//      verify(letters[0][1]).setOpaque(true);
+//      verify(letters[0][2]).setOpaque(true);
+//      verify(letters[0][3]).setOpaque(true);
+//      verify(letters[0][4]).setOpaque(true);
 
     }
 

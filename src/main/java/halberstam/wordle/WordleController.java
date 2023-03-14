@@ -40,9 +40,6 @@ public class WordleController {
         if (lettersTyped == 5) {
             enter.setOpaque(true);
             enter.setBackground(Color.green);
-//        } else if (lettersTyped < 5) {
-//            enter.setOpaque(false);
-//            enter.setBackground(Color.green);
         }
     }
 
