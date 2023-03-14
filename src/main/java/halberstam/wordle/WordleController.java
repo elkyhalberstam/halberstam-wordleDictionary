@@ -5,6 +5,7 @@ import java.awt.*;
 
 import static halberstam.wordle.CharResult.*;
 import static java.awt.Color.GRAY;
+import static java.awt.Color.white;
 
 public class WordleController {
 
@@ -35,6 +36,14 @@ public class WordleController {
             labels[numGuesses][lettersTyped].setText(letter);
             lettersTyped++;
         }
+
+        if (lettersTyped == 5) {
+            enter.setOpaque(true);
+            enter.setBackground(Color.green);
+//        } else if (lettersTyped < 5) {
+//            enter.setOpaque(false);
+//            enter.setBackground(Color.green);
+        }
     }
 
     public void enterGuess() {
@@ -50,6 +59,7 @@ public class WordleController {
                 checkingResult(guessResult);
                 numGuesses++;
                 lettersTyped = 0;
+                enter.setBackground(white);
             } else {
                 System.out.println(word + "Dose not exist");
             }
@@ -77,5 +87,6 @@ public class WordleController {
             lettersTyped--;
             labels[numGuesses][lettersTyped].setText("");
         }
+        enter.setBackground(white);
     }
 }
