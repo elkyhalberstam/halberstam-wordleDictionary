@@ -14,12 +14,12 @@ class WordleControllerTest {
     WordleGame wordleGame = mock(WordleGame.class);
     WordleDictionary dictionary = mock(WordleDictionary.class);
     JLabel letters[][] = new JLabel[][]{
-            {mock(), mock(), mock(), mock(), mock(),},
-            {mock(), mock(), mock(), mock(), mock(),},
-            {mock(), mock(), mock(), mock(), mock(),},
-            {mock(), mock(), mock(), mock(), mock(),},
-            {mock(), mock(), mock(), mock(), mock(),},
-            {mock(), mock(), mock(), mock(), mock(),}
+            {mock(), mock(), mock(), mock(), mock()},
+            {mock(), mock(), mock(), mock(), mock()},
+            {mock(), mock(), mock(), mock(), mock()},
+            {mock(), mock(), mock(), mock(), mock()},
+            {mock(), mock(), mock(), mock(), mock()},
+            {mock(), mock(), mock(), mock(), mock()}
     };
     JButton[] keyboard = new JButton[]{mock()};
     JButton enter = mock();
