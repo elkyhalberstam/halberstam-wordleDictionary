@@ -3,9 +3,12 @@ package halberstam.wordle;
 import org.junit.jupiter.api.Test;
 
 import javax.swing.*;
+import java.awt.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 class WordleControllerTest {
     WordleGame wordleGame = mock(WordleGame.class);
@@ -40,21 +43,33 @@ class WordleControllerTest {
     @Test
     void enterGuess() {
         //given
-        WordleController tempController = controller;
+        Set words = new HashSet((List.of("DRINK", "TRINK")));
+        doReturn(words).when(dictionary).getList();
+        doReturn(true).when(dictionary).doesExist("TRINK");
+
+        doReturn("DRANK").when(wordleGame).getWord();
+
+        CharResult[] result = {CharResult.NotFound, CharResult.Correct, CharResult.Correct,
+                CharResult.Correct, CharResult.Correct};
+        doReturn(result).when(wordleGame).guess("FRANK");
+
+        WordleController controller = new WordleController(
+                wordleGame, dictionary, letters, keyboard, enter, backspace);
         //when
-        controller.addLetter("D");
+        controller.addLetter("F");
         controller.addLetter("R");
-        controller.addLetter("I");
+        controller.addLetter("A");
         controller.addLetter("N");
         controller.addLetter("K");
+
         controller.enterGuess();
 
         //then
-        verify(letters[0][0]).setOpaque(true);
-        verify(letters[0][1]).setOpaque(true);
-        verify(letters[0][2]).setOpaque(true);
-        verify(letters[0][3]).setOpaque(true);
-        verify(letters[0][4]).setOpaque(true);
+        verify(letters[0][0]).setBackground(Color.yellow);
+        verify(letters[0][1]).setBackground(Color.green);
+        verify(letters[0][2]).setBackground(Color.green);
+        verify(letters[0][3]).setBackground(Color.green);
+        verify(letters[0][4]).setBackground(Color.green);
 
     }
 
