@@ -43,15 +43,21 @@ class WordleControllerTest {
     @Test
     void enterGuess() {
         //given
-        Set words = new HashSet((List.of("DRINK", "TRINK")));
+        Set words = new HashSet((List.of("DRANK")));
         doReturn(words).when(dictionary).getList();
-        doReturn(true).when(dictionary).doesExist("TRINK");
+        doReturn(true).when(dictionary).doesExist("FRANK");
 
         doReturn("DRANK").when(wordleGame).getWord();
 
         CharResult[] result = {CharResult.NotFound, CharResult.Correct, CharResult.Correct,
                 CharResult.Correct, CharResult.Correct};
         doReturn(result).when(wordleGame).guess("FRANK");
+
+        doReturn("F").when(letters[0][0]).getText();
+        doReturn("R").when(letters[0][1]).getText();
+        doReturn("A").when(letters[0][2]).getText();
+        doReturn("N").when(letters[0][3]).getText();
+        doReturn("K").when(letters[0][4]).getText();
 
         WordleController controller = new WordleController(
                 wordleGame, dictionary, letters, keyboard, enter, backspace);
@@ -65,7 +71,7 @@ class WordleControllerTest {
         controller.enterGuess();
 
         //then
-        verify(letters[0][0]).setBackground(Color.yellow);
+        verify(letters[0][0]).setBackground(Color.gray);
         verify(letters[0][1]).setBackground(Color.green);
         verify(letters[0][2]).setBackground(Color.green);
         verify(letters[0][3]).setBackground(Color.green);
