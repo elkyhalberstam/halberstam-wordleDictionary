@@ -58,7 +58,7 @@ public class WordleController {
                 lettersTyped = 0;
                 enter.setBackground(white);
             } else {
-                System.out.println(word + "Dose not exist");
+                System.out.println(word + " Dose not exist");
             }
         }
     }
@@ -66,7 +66,7 @@ public class WordleController {
     private void checkingResult(CharResult[] guessResult) {
         for (int i = 0; i < guessResult.length; i++) {
             CharResult currChar = guessResult[i];
-            if (currChar.equals(NotFound)) {
+            if (currChar == NotFound) {
                 labels[numGuesses][i].setOpaque(true);
                 labels[numGuesses][i].setBackground(GRAY);
             } else if (currChar.equals(WrongPlace)) {

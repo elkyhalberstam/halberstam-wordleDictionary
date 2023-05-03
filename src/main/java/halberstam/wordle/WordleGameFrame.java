@@ -90,9 +90,9 @@ public class WordleGameFrame extends JFrame {
                 char input = e.getKeyChar();
                 if (Character.isAlphabetic(input)) {
                     controller.addLetter(String.valueOf(e.getKeyChar()).toUpperCase(Locale.ROOT));
-                } else if (String.valueOf(e.getKeyChar()).equals("\b")) {
+                } else if (e.getKeyChar() == '\b') {
                     controller.backspace();
-                } else if (String.valueOf(e.getKeyChar()).equals("\n")) {
+                } else if (e.getKeyChar() == '\n') {
                     controller.enterGuess();
                 }
             }

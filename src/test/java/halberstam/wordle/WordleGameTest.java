@@ -18,7 +18,7 @@ class WordleGameTest {
     public void guessCorrect() {
         //given
         WordleDictionary dictionary = Mockito.mock(WordleDictionary.class);
-        Set words = new HashSet((List.of("DRINK")));
+        Set<String> words = new HashSet<>((List.of("DRINK")));
         doReturn(words).when(dictionary).getList();
         WordleGame testGame = new WordleGame(dictionary);
         //when
@@ -32,7 +32,7 @@ class WordleGameTest {
     public void guessWrong() {
         //given
         WordleDictionary dictionary = Mockito.mock(WordleDictionary.class);
-        Set words = new HashSet((List.of("DRINK")));
+        Set<String> words = new HashSet<>((List.of("DRINK")));
         doReturn(words).when(dictionary).getList();
         WordleGame testGame = new WordleGame(dictionary);
         //when
